@@ -6,7 +6,7 @@ Imagine an app that keeps your relationship fresh and fun, no matter how far apa
 ## Key features
 1. Daily Questions: Couples receive a new relationship-building question every day.
 2. Progress Tracking: Users can see their history of answered questions
-3. Real-Time Chat: A messaging system lets couples stay connected, allowing them to chat and share thoughts in real time.4.
+3. Real-Time Chat: A messaging system lets couples stay connected, allowing them to chat and share thoughts in real-time.
 4. Account Creation & Login: Users can create and securely log in to their accounts.
    
 ## Technologies
