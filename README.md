@@ -20,4 +20,4 @@ Imagine an app that keeps your relationship fresh and fun, no matter how far apa
 - **WebSocket Data**: Enables real-time chat and updates progress instantly as users interact with the app.
 
 ## Design
-![ ](https://github.com/cy928/startup/blob/main/design.jpg?raw=true)
+![ ](https://github.com/cy928/startup/blob/main/design.jpg)
