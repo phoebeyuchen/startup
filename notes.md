@@ -10,7 +10,7 @@ This is the pattern that you want to make a reflexive part of your development p
 
 ## HTML
 
-# Input Element
+### Input Element
 form: Input container and submission
 fieldset:	Labeled input grouping
 input:	Multiple types of user input
@@ -22,7 +22,7 @@ label:	Individual input label
 output:	Output of input
 meter:	Display value with a known range
 
-# Attribute
+### Attribute
 name:	The name of the input. This is submitted as the name of the input if used in a form
 disabled:	Disables the ability for the user to interact with the input
 value:	The initial value of the input
