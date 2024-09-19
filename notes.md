@@ -10,7 +10,7 @@ This is the pattern that you want to make a reflexive part of your development p
 
 ## HTML
 
-### structure elements
+### Structure elements
 The two major purposes of HTML is to provide structure and content to your web application. 
 Some of the common HTML structural elements include `body`, `header`, `footer`, `main`, `section`, `aside`, `p`, `table`, `ol/ul`, `div`, and `span`. 
 We demonstrate the use of each element with the following HTML document. 
