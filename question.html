@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Tell browsers not to scale the viewport automatically -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bondly HTML</title>
-    <link rel="icon" href="favicon.ico" />
-  </head>
-  <body>
-    <!-- Use header, main, and footer elements to give semantic structure -->
-    <header>
-      <h1>Bondly</h1>
-      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
-      <hr />
-      <!-- Navigation elements -->
-      <nav>
-        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-        <menu>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="question.html">Daily Question</a></li>
-          <li><a href="progress.html">Progress</a></li>
-          <li><a href="chat.html">Chat</a></li>
-        </menu>
-      </nav>
-    </header>
 
-    <main>
-        <h2>Today's Question</h2>
-        <p>"How did you feel when you first met each other?"</p>
+<head>
+  <meta charset="UTF-8" />
+  <!-- Tell browsers not to scale the viewport automatically -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bondly HTML</title>
+  <link rel="icon" href="favicon.ico" />
+</head>
 
-        <form action="#">
-          <label for="textInput">Write down your answer:</label>
-          <input type="text" id="textInput" name="textInput" placeholder="Type something here...">
-          <button type="submit">Save</button>
-        </form>
-    </main>
+<body>
+  <!-- Use header, main, and footer elements to give semantic structure -->
+  <header>
+    <h1>Bondly</h1>
+    <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+    <hr />
+    <!-- Navigation elements -->
+    <nav>
+      <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+      <menu>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="question.html">Daily Question</a></li>
+        <li><a href="progress.html">Progress</a></li>
+        <li><a href="chat.html">Chat</a></li>
+      </menu>
+    </nav>
+  </header>
 
-    <footer>
-      <hr />
-      <span class="text-reset">Phoebe Chen</span>
-      <br />
-      <a href="https://github.com/phoebeyuchen/startup">GitHub</a>
-    </footer>
-  </body>
+  <main>
+    <h2>Today's Question</h2>
+    <p>"How did you feel when you first met each other?"</p>
+
+    <form>
+      <label for="textInput">Write down your answer:</label><br>
+      <input type="text" id="textInput" name="textInput" placeholder="Type something here...">
+      <button type="submit">Save</button>
+    </form>
+  </main>
+
+  <footer>
+    <hr />
+    <span class="text-reset">Phoebe Chen</span>
+    <br />
+    <a href="https://github.com/phoebeyuchen/startup">GitHub</a>
+  </footer>
+</body>
+
 </html>
