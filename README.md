@@ -25,7 +25,6 @@ Imagine an app that keeps your relationship fresh and fun, no matter how far apa
 - **WebSocket Data**: Enables real-time chat and updates progress instantly as users interact with the app.
 
 ### Design
-
 ![ ](https://github.com/cy928/startup/blob/main/design-with-color.jpg)
 
 ## HTML deliverable
@@ -35,7 +34,7 @@ For this deliverable I built out the structure of my application using HTML.
 - [x] **HTML pages** - Four HTML pages that represent the ability to login, answer questions, view the progress, and chat.
 - [x] **Links** - The login page links to the daily question page. A navigation bar on each page allows users to navigate between Home (login), Daily Question, Progress, and Chat.
 - [x] **Text** - Each daily question, the progress, and the chat recordis is represented by a textual description.
-- [x] **Images** - I added image on the login page(🫶🏻), browser tab, and the the background of the header.
+- [x] **Images** - I added image in the login page(🫶🏻 is an image tag), browser tab, and the the background of the header.
 - [x] **DB/Login** - Input box and submit button for login. The progress pages retrieve user-specific data from the database.
-- [x] **Placeholder for 3rd party service calls** - Placeholder for future integration of an external API that could provide inspirational relationship question to enhance user engagement.
+- [x] **Placeholder for 3rd party service calls** - Placeholder in the daily question page for future integration of an external API that could provide inspirational relationship question to enhance user engagement.
 - [x] **WebSocket** - Real-time chat updates instantly show new messages in the chat page as they are sent.
