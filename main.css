@@ -1,0 +1,28 @@
+/* Header */
+header {
+    background-color: #cdf7f6;
+    color: #4c6d8d;
+    display: flex;
+    align-items: end;
+}
+header h1 {
+    font-family: "Caveat", cursive;;
+    font-size: 50px;
+    margin: 15px 0 15px 30px;
+}
+nav a {
+    font-family: "Sans-serif", sans-serif;
+    text-decoration: none;
+    color: #8fb8de;
+}
+.inactive:hover {
+    color: #83a7c9;
+}
+.active {
+    color: rgb(89, 134, 176);
+}
+menu {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 26px;
+}

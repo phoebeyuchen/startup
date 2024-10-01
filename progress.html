@@ -6,23 +6,25 @@
   <!-- Tell browsers not to scale the viewport automatically -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bondly HTML</title>
-  <link rel="icon" href="favicon.ico" />
+  <link rel="icon" href="heart.png" />
+  <link rel="stylesheet" href="main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <!-- Use header, main, and footer elements to give semantic structure -->
   <header>
-    <h1  style="background-image: url('https://img.freepik.com/premium-photo/light-blue-background-adorned-with-white-daisies-small-flowers-creating-cheerful-pattern_658005-11325.jpg?w=1060'); height: 60px">Bondly</h1>
+    <h1>Bondly</h1>
     <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
-    <hr />
-    <!-- Navigation elements -->
     <nav>
       <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
       <menu>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="question.html">Daily Question</a></li>
-        <li><a href="progress.html">Progress</a></li>
-        <li><a href="chat.html">Chat</a></li>
+        <a href="index.html" class="inactive">Home</a>
+        <a href="question.html" class="inactive">Daily Question</a>
+        <a href="progress.html" class="active">Progress</a>
+        <a href="chat.html" class="inactive">Chat</a>
       </menu>
     </nav>
   </header>
