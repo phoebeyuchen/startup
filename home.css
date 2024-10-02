@@ -1,0 +1,55 @@
+.user-info {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.email-password {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+input {
+    border-radius: 3px;
+    border: 1px solid;
+    padding: 4px;
+    font-size: 10px;
+    flex: 1;
+}
+input:hover {
+    border-color: #6a605c;
+}
+input:focus {
+    border: 1.5px solid #6a605c;
+    outline: none;
+}
+.login-create {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 12px;
+}
+button {
+    color: #6a605c;
+    border-radius: 5px;
+    border: 1px solid #fff;
+}
+.login {
+    background-color: #baa9a4;
+    padding: 5px 12px;
+
+}
+.login:hover {
+    background-color: #a89790;
+}
+.create {
+    color: #baa9a4;
+    background-color: #fff;
+    border: none;
+    padding: 5px 10px;
+}
+.create:hover {
+    text-decoration: underline;
+}
+
+
