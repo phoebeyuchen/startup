@@ -8,6 +8,7 @@
   <title>Bondly</title>
   <link rel="icon" href="heart.png" />
   <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="home.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
@@ -30,9 +31,11 @@
   </header>
 
   <main>
-    <h2>Welcome to Bondly</h2>
-    <img src="https://em-content.zobj.net/source/apple/325/heart-hands_light-skin-tone_1faf6-1f3fb_1f3fb.png" alt="">
-    <form method="get" action="question.html">
+    <div class="title">
+      <h2>Welcome to Bondly</h2>
+      <img src="heart.png" alt="">
+    </div>
+    <form method="get" action="question.html" class="user-info">
       <div>
         <span>Email:</span>
         <input type="text" placeholder="your@email.com" />
@@ -41,8 +44,10 @@
         <span>Password:</span>
         <input type="password" placeholder="password" />
       </div>
-      <button type="submit">Login</button>
-      <button type="submit">Create</button>
+      <div class="login-create">
+        <button type="submit">Login</button>
+        <button type="submit">Create</button>
+      </div>
     </form>
   </main>
 
