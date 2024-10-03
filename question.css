@@ -6,6 +6,10 @@ p {
     letter-spacing: 1px;
     margin: 0;
 }
+img {
+    padding-left: 5px; 
+    width: 25px;
+}
 label {
     font-size: 14px;
 }
@@ -14,24 +18,25 @@ label {
     display: inline-block;
 }
 textarea {
+    background-color: #f8f5f4;
     display: block;
     font-size: 12px;
     height: 150px;
     width: 300px;
-    border: 1px solid #111;
+    border: none;
     border-radius: 3px;
     padding: 5px 0 0 7px;
     margin-top: 10px;
 }
 textarea:hover {
-    border-color: #baa9a4;
+    border: 1px solid #baa9a4;
 }
 textarea:focus {
     border: 1.5px solid #baa9a4;
     outline: none;
 }
 button {
-    color: #6a605c;
+    color: #fff;
     background-color: #baa9a4;
     border-radius: 5px;
     border: 1px solid #fff;

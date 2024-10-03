@@ -8,6 +8,7 @@
   <title>Bondly HTML</title>
   <link rel="icon" href="heart.png" />
   <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="progress.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
@@ -22,7 +23,7 @@
       <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
       <menu>
         <a href="index.html" class="inactive">Home</a>
-        <a href="question.html" class="inactive">Daily Question</a>
+        <a href="question.html" class="inactive">Question</a>
         <a href="progress.html" class="active">Progress</a>
         <a href="chat.html" class="inactive">Chat</a>
       </menu>
@@ -30,7 +31,11 @@
   </header>
 
   <main>
-    <h2>Answered Questions</h2>
+    <div class="title">
+      <h2>Answered Questions</h2>
+      <img src="checklist.png" alt="">
+    </div>
+    
     <table>
       <thead>
         <tr>
@@ -44,22 +49,22 @@
         <tr>
           <td>1</td>
           <td>How did you feel when you first met each other?</td>
-          <td>answer1: Awesome<br>
-            answer2: Great</td>
+          <td>Phoebe: Awesome<br>
+            Spencer: Great</td>
           <td>Sep 2, 2024</td>
         </tr>
         <tr>
           <td>2</td>
           <td>What's your love language?</td>
-          <td>answer1: Quality time<br>
-            answer2: Acts of service</td>
+          <td>Phoebe: Quality time<br>
+            Spencer: Acts of service</td>
           <td>Sep 3, 2024</td>
         </tr>
         <tr>
           <td>3</td>
           <td>What do you like about him/her?</td>
-          <td>answer1: He's kind and considerate!<br>
-            answer2: She's funny and sweet!</td>
+          <td>Phoebe: He's kind and reliable!<br>
+            Spencer: She's funny and sweet!</td>
           <td>Sep 4, 2024</td>
         </tr>
       </tbody>
