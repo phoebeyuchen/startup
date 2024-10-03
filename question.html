@@ -8,6 +8,7 @@
   <title>Bondly HTML</title>
   <link rel="icon" href="heart.png" />
   <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="question.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
@@ -31,12 +32,13 @@
 
   <main>
     <h2>Today's Question</h2>
-    <p>"How did you feel when you first met each other?"</p>
+    <p>" How did you feel when you first met each other? "</p>
 
     <form>
-      <label for="textInput">Write down your answer:</label><br>
-      <input type="text" id="textInput" name="textInput" placeholder="Type something here...">
-      <button type="submit">Save</button>
+      <div class="textarea-container">
+        <textarea id="textInput" name="textInput" placeholder="Write down your answer:"></textarea>
+        <button type="submit">Save</button>
+      </div>
     </form>
   </main>
 

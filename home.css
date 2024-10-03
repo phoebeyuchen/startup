@@ -17,10 +17,10 @@ input {
     flex: 1;
 }
 input:hover {
-    border-color: #6a605c;
+    border-color: #baa9a4;
 }
 input:focus {
-    border: 1.5px solid #6a605c;
+    border: 1.5px solid #baa9a4;
     outline: none;
 }
 .login-create {
@@ -33,6 +33,7 @@ button {
     color: #6a605c;
     border-radius: 5px;
     border: 1px solid #fff;
+    cursor: pointer;
 }
 .login {
     background-color: #baa9a4;
