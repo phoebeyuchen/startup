@@ -8,7 +8,7 @@ table {
     background-color: #f8f5f4; 
     border-radius: 8px;
     overflow: hidden; /* For rounded corners */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
 }
 tbody tr:nth-child(even) {
     background-color: #f0eaea;
@@ -17,7 +17,7 @@ tbody tr:hover {
     background-color: #e3dcd9; 
 }
 th {
-    color: white; 
+    color: #6a605c; 
     background-color: #baa9a4; 
     padding: 12px;
     font-size: 14px;

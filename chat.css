@@ -2,3 +2,73 @@ img {
     padding-left: 6px; 
     width: 22px;
 }
+#chat-container {
+    background-color: #f0eaea; 
+    border-radius: 8px; 
+    margin-bottom: 10px;
+    width: 60%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+}
+h3 {
+    margin: 0;
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #baa9a4;
+    color: #6a605c;
+    margin-bottom: 15px;
+    font-size: 20px; 
+}
+/* Chat Messages */
+.message {
+    display: flex; 
+    flex-direction: column; 
+    font-size: 14px; 
+
+}
+.message p {
+    margin: 5px 13px;
+    padding: 8px 13px;
+    border-radius: 20px; 
+}
+.message:not(.received) p {
+    background-color: #baa9a4; 
+    color: white;
+    align-self: flex-end; 
+}
+.message.received p {
+    background-color: #f8f5f4; 
+    align-self: flex-start; 
+}
+
+/* Input Form */
+#chat-form {
+    display: flex;
+    margin-top: 15px;
+}
+
+#input {
+    border: none; 
+    border-bottom-left-radius: 8px; 
+    background-color: white;
+    padding: 10px;
+    flex: 1; 
+    font-size: 12px; 
+    outline: none;
+
+}
+#input::placeholder {
+    color: #aaa; 
+}
+/* Button */
+button {
+    background-color: #867974; 
+    color: white; 
+    border: none;
+    border-bottom-right-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #5c5450; 
+}

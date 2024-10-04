@@ -13,7 +13,7 @@ input {
     border-radius: 3px;
     border: 1px solid;
     padding: 4px;
-    font-size: 10px;
+    font-size: 12px;
     flex: 1;
 }
 input:hover {

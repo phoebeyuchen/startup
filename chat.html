@@ -33,17 +33,29 @@
   <main>
     <div class="title">
       <h2>Chat Room</h2>
-      <img src="speech-bubble.png" alt="">
+      <img src="conversation.png" alt="">
     </div>
     <div id="chat-container">
       <h3>Spencer</h3>
-      <p>gym?</p>
-      <p>Sure!</p>
-      <p>What time?</p>
-      <p>How about 5:15</p>
-      <p>You need a ride?</p>
-      <p>Yes!</p>
-      <form>
+      <div class="message received">
+        <p>gym?</p>
+      </div>
+      <div class="message">
+        <p>Sure!</p>
+      </div>
+      <div class="message">
+        <p>What time?</p>
+      </div>
+      <div class="message received">
+        <p>How about 5:15?</p>
+      </div>
+      <div class="message received">
+        <p>Do you need a ride?</p>
+      </div>
+      <div class="message">
+        <p>Yes!</p>
+      </div>
+      <form id="chat-form">
         <input id="input" placeholder="Type a message..." />
         <button type="submit">Send</button>
       </form>
