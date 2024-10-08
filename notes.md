@@ -55,3 +55,18 @@ Each of the body children then contains other structural content.
 - em: Relative to the parent element
 - rem: Relative to the root element
 - vh / vw: Relative to the viewport height/width
+
+## JavaScript 
+
+### Object Function	
+- pop: Remove an item from the end of the array	
+- slice: Return a sub-array	
+- sort: Run a function to sort an array in place	
+- values: Creates an iterator for use with a for of loop	
+- find: Find the first item satisfied by a test function	
+- forEach: Run a function on each array item	
+- reduce: Run a function to reduce each array item to a single item	
+- map: Run a function to map an array to a new array	
+- filter: Run a function to remove items	
+- every: Run a function to test if all items match 
+- some: Run a function to test if any items match	
