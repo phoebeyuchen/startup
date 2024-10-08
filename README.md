@@ -29,12 +29,25 @@ Imagine an app that keeps your relationship fresh and fun, no matter how far apa
 
 ## HTML deliverable
 
-For this deliverable I built out the structure of my application using HTML.
+For this deliverable, I built out the structure of my application using HTML.
 
-- [x] **HTML pages** - Four HTML pages that represent the ability to login, answer questions, view the progress, and chat.
+- [x] **HTML pages** - Four HTML pages that represent the ability to log in, answer questions, view the progress, and chat.
 - [x] **Links** - The login page links to the daily question page. A navigation bar on each page allows users to navigate between Home (login), Daily Question, Progress, and Chat.
 - [x] **Text** - Each daily question, the progress, and the chat recordis is represented by a textual description.
-- [x] **Images** - I added image in the login page(🫶🏻 is an image tag), browser tab, and the the background of the header.
+- [x] **Images** - I added an image in the login page(🫶🏻 is an image tag), browser tab, and the background of the header.
 - [x] **DB/Login** - Input box and submit button for login. The progress pages retrieve user-specific data from the database.
-- [x] **Placeholder for 3rd party service calls** - Placeholder in the daily question page for future integration of an external API that could provide inspirational relationship question to enhance user engagement.
-- [x] **WebSocket** - Real-time chat updates instantly show new messages in the chat page as they are sent.
+- [x] **Placeholder for 3rd party service calls** - Placeholder in the daily question page for future integration of an external API that could provide inspirational relationship questions to enhance user engagement.
+- [x] **WebSocket** - Real-time chat updates instantly show new messages on the chat page as they are sent.
+
+
+### CSS deliverable
+
+For this deliverable, I properly styled the application into its final appearance.
+
+- [x] **Header, footer, and main content body** - Styled these main parts of the app and added hover effects on each page.
+- [x] **Navigation elements** -  Removed the underlines and added a hover effect.
+- [x] **Responsive to window resizing** - Made sure the app looks good on all screen sizes and devices.
+- [x] **Application elements** - Used nice colors and spacing to make everything clear and easy to see.
+- [x] **Application text content** - Used different fonts to make it more organized.
+- [x] **Application images** - Added small icons for each page.
+ 
