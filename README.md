@@ -40,7 +40,7 @@ For this deliverable, I built out the structure of my application using HTML.
 - [x] **WebSocket** - Real-time chat updates instantly show new messages on the chat page as they are sent.
 
 
-### CSS deliverable
+## CSS deliverable
 
 For this deliverable, I properly styled the application into its final appearance.
 
