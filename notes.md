@@ -42,3 +42,16 @@ Each of the body children then contains other structural content.
 - disabled: Disables the ability for the user to interact with the input
 - value: The initial value of the input
 - required: Signifies that a value is required in order to be valid
+
+## CSS
+
+### Flexbox
+- justify-content: Aligns flex items along the main axis.
+- align-items: Aligns flex items along the cross-axis.
+
+### Common Units
+- px: Pixels
+- %: Percentage
+- em: Relative to the parent element
+- rem: Relative to the root element
+- vh / vw: Relative to the viewport height/width
