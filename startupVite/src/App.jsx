@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import './app.css';
+
+import Home from './login/login';
+import Question from './question/question';
+import Progress from './progress/progress';
+import Chat from './chat/chat';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <BrowserRouter>
+      <div className="app">
+        <header>
+          <h1>Bondly</h1>
+          <nav>
+            <menu>
+              <NavLink to="/" className={({ isActive }) => isActive ? 'active' : 'inactive'}>
+                Home
+              </NavLink>
+              <NavLink to="/question" className={({ isActive }) => isActive ? 'active' : 'inactive'}>
+                Question
+              </NavLink>
+              <NavLink to="/progress" className={({ isActive }) => isActive ? 'active' : 'inactive'}>
+                Progress
+              </NavLink>
+              <NavLink to="/chat" className={({ isActive }) => isActive ? 'active' : 'inactive'}>
+                Chat
+              </NavLink>
+            </menu>
+          </nav>
+        </header>
+
+        <Routes>
+          <Route path="/" element={<Home setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/question" element={<Question />} />
+          <Route path="/progress" element={<Progress />} />
+          <Route path="/chat" element={<Chat />} />
+        </Routes>
+
+        <footer>
+          <div>
+            Phoebe Chen
+            <br />
+            <a href="https://github.com/phoebeyuchen/startup">GitHub</a>
+          </div>
+        </footer>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
+
+
