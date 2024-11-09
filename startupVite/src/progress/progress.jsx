@@ -1,4 +1,5 @@
 import checklistIcon from '../assets/checklist.png';
+import './progress.css';
 
 export default function Progress() {
   const answers = [

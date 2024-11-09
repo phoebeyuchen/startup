@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import conversationIcon from '../assets/conversation.png';
+import './chat.css';
 
 export default function Chat() {
   const [message, setMessage] = useState('');

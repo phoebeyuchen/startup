@@ -34,7 +34,7 @@ textarea:focus {
     border: 1.5px solid #baa9a4;
     outline: none;
 }
-button {
+.save {
     color: #fff;
     background-color: #baa9a4;
     border-radius: 5px;
@@ -45,6 +45,6 @@ button {
     bottom: 10px; /* Adjust to position relative to the bottom */
     right: 10px;  /* Adjust to position relative to the right */
 }
-button:hover {
+.save:hover {
     background-color: #a89790;
 }

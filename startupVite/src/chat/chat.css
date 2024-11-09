@@ -61,13 +61,14 @@ h3 {
     color: #aaa; 
 }
 /* Button */
-button {
+#chat-form button {
     background-color: #867974; 
     color: white; 
     border: none;
     border-bottom-right-radius: 8px;
     padding: 10px 15px;
     cursor: pointer;
+    position: static;
 }
 button:hover {
     background-color: #5c5450; 

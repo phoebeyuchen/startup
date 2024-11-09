@@ -1,4 +1,5 @@
 import questionIcon from '../assets/question.png';
+import './question.css';
 
 export default function Question() {
   const handleSave = () => {
@@ -13,7 +14,7 @@ export default function Question() {
       <p>"How did you feel when you first met each other?"</p>
       <div className="textarea-container">
         <textarea placeholder="Type your answer here..." />
-        <button onClick={handleSave}>Save</button>
+        <button onClick={handleSave} className='save'>Save</button>
       </div>
     </main>
   );

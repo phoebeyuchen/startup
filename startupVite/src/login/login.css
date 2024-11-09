@@ -29,25 +29,27 @@ input:focus {
     gap: 10px;
     padding-top: 12px;
 }
-button {
+.login {
     color: #fff;
     border-radius: 5px;
     border: 1px solid #fff;
     cursor: pointer;
-}
-.login {
     background-color: #baa9a4;
     padding: 5px 12px;
+    position: relative;
 
 }
 .login:hover {
     background-color: #a89790;
 }
 .create {
+    border-radius: 5px;
+    cursor: pointer;
     color: #baa9a4;
     background-color: #fff;
     border: none;
     padding: 5px 10px;
+    position: relative;
 }
 .create:hover {
     text-decoration: underline;
