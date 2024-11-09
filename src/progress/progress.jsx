@@ -1,24 +1,16 @@
+import React, { useContext } from 'react';
+import { AnswersContext } from '../AnswersContext';
 import checklistIcon from '../images/checklist.png';
 import './progress.css';
 
 export default function Progress() {
-  const answers = [
-    {
-      id: 1,
-      question: "How did you feel when you first met each other?",
-      answers: {
-        Phoebe: "Awesome",
-        Spencer: "Great"
-      },
-      date: "Sep 2, 2024"
-    },
-  ];
+  const { answers } = useContext(AnswersContext);
 
   return (
     <main>
       <div className="title">
         <h2>Answered Questions</h2>
-        <img src={checklistIcon} alt="checklist" className="progress-icon"/>
+        <img src={checklistIcon} alt="checklist" className="progress-icon" />
       </div>
       <table>
         <thead>
@@ -30,14 +22,11 @@ export default function Progress() {
           </tr>
         </thead>
         <tbody>
-          {answers.map((answer) => (
+          {answers.map((answer, index) => (
             <tr key={answer.id}>
-              <td>{answer.id}</td>
+              <td>{index + 1}</td>
               <td>{answer.question}</td>
-              <td>
-                Phoebe: {answer.answers.Phoebe}<br />
-                Spencer: {answer.answers.Spencer}
-              </td>
+              <td>{answer.answers.User}</td>
               <td>{answer.date}</td>
             </tr>
           ))}

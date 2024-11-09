@@ -1,61 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <!-- Tell browsers not to scale the viewport automatically -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bondly</title>
-  <link rel="icon" href="heart.png" />
-  <link rel="stylesheet" href="main.css">
-  <link rel="stylesheet" href="home.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
-</head>
-
-<body>
-  <!-- Use header, main, and footer elements to give semantic structure -->
-  <header>
-    <h1>Bondly</h1>
-    <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
-    <nav>
-      <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-      <menu>
-        <a href="index.html" class="active">Home</a>
-        <a href="question.html" class="inactive">Question</a>
-        <a href="progress.html" class="inactive">Progress</a>
-        <a href="chat.html" class="inactive">Chat</a>
-      </menu>
-    </nav>
-  </header>
-
-  <main>
-    <div class="title">
-        <h2><nobr>Welcome to Bondly</nobr></h2>
-      <img src="images/heart.png" alt="">
-    </div>
-    <form method="get" action="question.html" class="user-info">
-      <div class="email-password">
-        <span>Email:</span>
-        <input type="text" placeholder="your@email.com" />
-      </div>
-      <div class="email-password">
-        <span>Password:</span>
-        <input type="password" placeholder="password" />
-      </div>
-      <div class="login-create">
-        <button type="submit" class="login">Login</button>
-        <button type="submit" class="create">Create</button>
-      </div>
-    </form>
-  </main>
-
-  <footer>
-    <span class="text-reset">Phoebe Chen</span>
-    <br />
-    <a href="https://github.com/phoebeyuchen/startup">GitHub</a>
-  </footer>
-</body>
-
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="heart.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <title>Bondly</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/index.jsx"></script>
+  </body>
 </html>

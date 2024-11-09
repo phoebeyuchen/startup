@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, NavLink, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import './app.css';
 
@@ -7,6 +7,7 @@ import Question from './question/question';
 import Progress from './progress/progress';
 import Chat from './chat/chat';
 import Welcome from './welcome/welcome';
+import { AnswersProvider } from './AnswersContext';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,24 +38,25 @@ function App() {
                   <NavLink to="/chat" className={({ isActive }) => isActive ? 'active' : 'inactive'}>
                     Chat
                   </NavLink>
-                 
                 </>
               )}
             </menu>
           </nav>
         </header>
 
-        <Routes>
-          <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-          {isLoggedIn && (
-            <>
-              <Route path="/question" element={<Question />} />
-              <Route path="/progress" element={<Progress />} />
-              <Route path="/chat" element={<Chat />} />
-              <Route path="/welcome" element={<Welcome setIsLoggedIn={setIsLoggedIn} />} />
-            </>
-          )}
-        </Routes>
+        <AnswersProvider>
+          <Routes>
+            <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+            {isLoggedIn && (
+              <>
+                <Route path="/question" element={<Question />} />
+                <Route path="/progress" element={<Progress />} />
+                <Route path="/chat" element={<Chat />} />
+                <Route path="/welcome" element={<Welcome setIsLoggedIn={setIsLoggedIn} />} />
+              </>
+            )}
+          </Routes>
+        </AnswersProvider>
 
         <footer>
           <div>
@@ -67,6 +69,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
 
 export default App;
