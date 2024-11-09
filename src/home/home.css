@@ -1,0 +1,30 @@
+.question-logout {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 12px;
+}
+.logout {
+    color: #baa9a4;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.logout:hover {
+    text-decoration: underline;
+}
+.question {
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    background-color: #baa9a4;
+    padding: 5px 12px;
+    position: relative;
+
+}
+.question:hover {
+    background-color: #a89790;
+}
+
+

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import heartIcon from '../images/heart.png';
 import './login.css';
 
-export default function Login({ setIsLoggedIn }) {
+export default function Login({ setIsLoggedIn, setUserEmail }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -11,7 +11,8 @@ export default function Login({ setIsLoggedIn }) {
   const handleLogin = (e) => {
     e.preventDefault();
     setIsLoggedIn(true);
-    navigate('/welcome');
+    setUserEmail(email);
+    navigate('/home');
   };
 
   return (

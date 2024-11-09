@@ -1,7 +1,7 @@
-p {
-    /* color: #6a605c; */
-    /* font-family: serif;  */
-    /* font-style: italic; */
+.question-text {
+    color: #6a605c;
+    font-family: serif; 
+    font-style: italic;
     font-size: 20px;
     text-align: center;
     letter-spacing: 1px;

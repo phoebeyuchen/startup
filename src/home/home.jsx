@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import heartIcon from '../images/heart.png';
-import './welcome.css';
+import './home.css';
 
-export default function Welcome({ setIsLoggedIn }) {
+export default function Home({ setIsLoggedIn, userEmail }) {
+  const username = userEmail.split('@')[0];
 
   return (
     <main>
       <div className="title">
-        <h2>Welcome to Bondly</h2>
+        <h2>Hello, {username}</h2>
         <img src={heartIcon} alt="heart" className="home-icon"/>
       </div>
-    
-      <div className="login-create">
+      
+      <div className="question-logout">
         <QuestionButton />
         <LogoutButton setIsLoggedIn={setIsLoggedIn} />
       </div>
@@ -22,8 +23,11 @@ export default function Welcome({ setIsLoggedIn }) {
 }
 
 export function LogoutButton({ setIsLoggedIn }) {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     setIsLoggedIn(false);
+    navigate('/');
   };
 
   return (
@@ -42,7 +46,7 @@ function QuestionButton() {
 
   return (
     <button onClick={handleQuestion} className="question">
-      Question
+      See Today's Question
     </button>
   );
 }

@@ -6,11 +6,12 @@ import Login from './login/login';
 import Question from './question/question';
 import Progress from './progress/progress';
 import Chat from './chat/chat';
-import Welcome from './welcome/welcome';
+import Home from './home/home';
 import { AnswersProvider } from './AnswersContext';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
 
   return (
     <BrowserRouter>
@@ -26,7 +27,7 @@ function App() {
               )}
               {isLoggedIn && (
                 <>
-                  <NavLink to="/welcome" className={({ isActive }) => isActive ? 'active' : 'inactive'}>
+                  <NavLink to="/home" className={({ isActive }) => isActive ? 'active' : 'inactive'}>
                     Home
                   </NavLink>
                   <NavLink to="/question" className={({ isActive }) => isActive ? 'active' : 'inactive'}>
@@ -46,13 +47,13 @@ function App() {
 
         <AnswersProvider>
           <Routes>
-            <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+            <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} setUserEmail={setUserEmail} />} />
             {isLoggedIn && (
               <>
                 <Route path="/question" element={<Question />} />
                 <Route path="/progress" element={<Progress />} />
                 <Route path="/chat" element={<Chat />} />
-                <Route path="/welcome" element={<Welcome setIsLoggedIn={setIsLoggedIn} />} />
+                <Route path="/home" element={<Home setIsLoggedIn={setIsLoggedIn} userEmail={userEmail} />} />
               </>
             )}
           </Routes>

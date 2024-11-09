@@ -29,7 +29,7 @@ export default function Question() {
         <h2>Today's Question</h2>
         <img src={questionIcon} alt="question" className="question-icon" />
       </div>
-      <p>"How did you feel when you first met each other?"</p>
+      <p className="question-text">"How did you feel when you first met each other?"</p>
       <div className="textarea-container">
         <textarea
           placeholder="Type your answer here..."
