@@ -1,4 +1,4 @@
-import checklistIcon from '../assets/checklist.png';
+import checklistIcon from '../images/checklist.png';
 import './progress.css';
 
 export default function Progress() {
@@ -18,7 +18,7 @@ export default function Progress() {
     <main>
       <div className="title">
         <h2>Answered Questions</h2>
-        <img src={checklistIcon} alt="checklist" />
+        <img src={checklistIcon} alt="checklist" className="progress-icon"/>
       </div>
       <table>
         <thead>

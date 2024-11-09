@@ -7,9 +7,9 @@ p {
     letter-spacing: 1px;
     margin: 0;
 }
-img {
-    padding-left: 5px; 
-    width: 25px;
+.question-icon {
+    padding-left: 5px;
+    width: 30px;
 }
 .textarea-container {
     position: relative; /* Set relative positioning to the container */

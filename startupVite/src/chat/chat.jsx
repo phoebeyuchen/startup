@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import conversationIcon from '../assets/conversation.png';
+import conversationIcon from '../images/conversation.png';
 import './chat.css';
 
 export default function Chat() {
@@ -25,7 +25,7 @@ export default function Chat() {
     <main>
       <div className="title">
         <h2>Chat Room</h2>
-        <img src={conversationIcon} alt="conversation" />
+        <img src={conversationIcon} alt="conversation" className="chat-icon"/>
       </div>
       <div id="chat-container">
         <h3>Spencer</h3>
@@ -41,7 +41,7 @@ export default function Chat() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message..."
           />
-          <button type="submit">Send</button>
+          <button type="submit" className='send'>Send</button>
         </form>
       </div>
     </main>

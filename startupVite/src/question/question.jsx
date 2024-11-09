@@ -1,4 +1,4 @@
-import questionIcon from '../assets/question.png';
+import questionIcon from '../images/question.png';
 import './question.css';
 
 export default function Question() {
@@ -9,7 +9,7 @@ export default function Question() {
     <main>
       <div className="title">
         <h2>Today's Question</h2>
-        <img src={questionIcon} alt="question" />
+        <img src={questionIcon} alt="question" className="question-icon"/>
       </div>
       <p>"How did you feel when you first met each other?"</p>
       <div className="textarea-container">

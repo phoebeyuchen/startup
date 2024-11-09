@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import heartIcon from '../assets/heart.png';
+import heartIcon from '../images/heart.png';
 import './login.css';
 
 export default function Login({ setIsLoggedIn }) {
@@ -11,14 +11,14 @@ export default function Login({ setIsLoggedIn }) {
   const handleLogin = (e) => {
     e.preventDefault();
     setIsLoggedIn(true);
-    navigate('/question');
+    navigate('/welcome');
   };
 
   return (
     <main>
       <div className="title">
         <h2>Welcome to Bondly</h2>
-        <img src={heartIcon} alt="heart" />
+        <img src={heartIcon} alt="heart" className='home-icon'/>
       </div>
       <form onSubmit={handleLogin} className="user-info">
         <div className="email-password">
@@ -41,7 +41,7 @@ export default function Login({ setIsLoggedIn }) {
         </div>
         <div className="login-create">
           <button type="submit" className="login">Login</button>
-          <button type="button" className="create">Create</button>
+          <button type="submit" className="create">Create</button>
         </div>
       </form>
     </main>
