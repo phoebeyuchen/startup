@@ -39,7 +39,6 @@ For this deliverable, I built out the structure of my application using HTML.
 - [x] **Placeholder for 3rd party service calls** - Placeholder in the daily question page for future integration of an external API that could provide inspirational relationship questions to enhance user engagement.
 - [x] **WebSocket** - Real-time chat updates instantly show new messages on the chat page as they are sent.
 
-
 ## CSS deliverable
 
 For this deliverable, I properly styled the application into its final appearance.
@@ -50,4 +49,18 @@ For this deliverable, I properly styled the application into its final appearanc
 - [x] **Application elements** - Used nice colors and spacing to make everything clear and easy to see.
 - [x] **Application text content** - Used different fonts to make it more organized.
 - [x] **Application images** - Added small icons for each page.
- 
+
+## React deliverable
+
+For this deliverable, I used React to make the application work for a single user. I also added placeholders for future technology.
+
+- [x] **Bundled and transpiled** - done!
+- [x] **Components** - Login, Home, Question, Progress, and Chat are all components with mocks for login and data storage.
+- [x] **login** - When you press the login or create button it takes you to the home page.
+- [x] **database** - Displayed the progress. Currently, this is stored and retrieved from local storage, but it will be replaced with the database data later.
+- [x] **WebSocket** - The chat component uses the local state for messages. This will be replaced with WebSocket for real-time chat.
+- [x] **application logic** - Login state controls access to protected routes. Questions can be answered and viewed on the progress page.
+- [x] **Route**r - Routing between all components with protected routes after login.
+- [x] **Hooks** - Used useState for component state and useContext for sharing answer data between components.
+
+
