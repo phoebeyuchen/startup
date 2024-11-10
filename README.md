@@ -56,11 +56,11 @@ For this deliverable, I used React to make the application work for a single use
 
 - [x] **Bundled and transpiled** - done!
 - [x] **Components** - Login, Home, Question, Progress, and Chat are all components with mocks for login and data storage.
-- [x] **login** - When you press the login or create button it takes you to the home page.
-- [x] **database** - Displayed the progress. Currently, this is stored and retrieved from local storage, but it will be replaced with the database data later.
-- [x] **WebSocket** - The chat component uses the local state for messages. This will be replaced with WebSocket for real-time chat.
-- [x] **application logic** - Login state controls access to protected routes. Questions can be answered and viewed on the progress page.
-- [x] **Route**r - Routing between all components with protected routes after login.
+   - [x] **login** - When you press the login or create button it takes you to the home page.
+   - [x] **database** - Displayed the progress. Currently, this is stored and retrieved from local storage, but it will be replaced with the database data later.
+   - [x] **WebSocket** - The chat component uses the local state for messages. This will be replaced with WebSocket for real-time chat.
+   - [x] **application logic** - Login state controls access to protected routes. Questions can be answered and viewed on the progress page.
+- [x] **Router** - Routing between all components with protected routes after login.
 - [x] **Hooks** - Used useState for component state and useContext for sharing answer data between components.
 
 
