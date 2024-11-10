@@ -28,6 +28,7 @@ export default function Login({ setIsLoggedIn, setUserEmail }) {
             type="email" 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@example.com"
             required
           />
         </div>
@@ -37,6 +38,7 @@ export default function Login({ setIsLoggedIn, setUserEmail }) {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="password"
             required
           />
         </div>
