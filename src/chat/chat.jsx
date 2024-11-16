@@ -1,23 +1,76 @@
-import { useState } from 'react';
-import conversationIcon from '../images/conversation.png';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import conversationIcon from '../assets/conversation.png';
 import './chat.css';
 
 export default function Chat() {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([
-    { id: 1, text: "gym?", received: true },
-    { id: 2, text: "Sure!", received: false },
-    { id: 3, text: "What time?", received: false },
-    { id: 4, text: "How about 5:15?", received: true },
-    { id: 5, text: "Do you need a ride?", received: true },
-    { id: 6, text: "Yes!", received: false }
-  ]);
+  const [messages, setMessages] = useState([]);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSend = (e) => {
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+          navigate('/');
+          return;
+        }
+
+        const response = await fetch('/api/messages', {
+          headers: {
+            'Authorization': token
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setMessages(data);
+        } else {
+          const data = await response.json();
+          setError(data.msg || 'Failed to load messages');
+        }
+      } catch (err) {
+        setError('Failed to connect to server');
+      }
+    };
+
+    fetchMessages();
+    // In a real application, you would set up WebSocket connection here
+    // and clean it up in the return function
+  }, [navigate]);
+
+  const handleSend = async (e) => {
     e.preventDefault();
-    if (message.trim()) {
-      setMessages([...messages, { id: messages.length + 1, text: message, received: false }]);
-      setMessage('');
+    if (!message.trim()) return;
+
+    try {
+      const token = localStorage.getItem('userToken');
+      if (!token) {
+        navigate('/');
+        return;
+      }
+
+      const response = await fetch('/api/message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token
+        },
+        body: JSON.stringify({ text: message })
+      });
+
+      if (response.ok) {
+        const newMessage = await response.json();
+        setMessages([...messages, newMessage]);
+        setMessage('');
+      } else {
+        const data = await response.json();
+        setError(data.msg || 'Failed to send message');
+      }
+    } catch (err) {
+      setError('Failed to connect to server');
     }
   };
 
@@ -27,10 +80,11 @@ export default function Chat() {
         <h2>Chat Room</h2>
         <img src={conversationIcon} alt="conversation" className="chat-icon"/>
       </div>
+      {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
       <div id="chat-container">
-        <h3>Spencer</h3>
+        <h3>Messages</h3>
         {messages.map((msg) => (
-          <div key={msg.id} className={`message ${msg.received ? 'received' : ''}`}>
+          <div key={msg.id} className={`message ${msg.userEmail === localStorage.getItem('userEmail') ? '' : 'received'}`}>
             <p>{msg.text}</p>
           </div>
         ))}
