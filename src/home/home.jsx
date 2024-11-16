@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import heartIcon from '../images/heart.png';
+import heartIcon from '../assets/heart.png';
 import './home.css';
 
 export default function Home({ setIsLoggedIn, userEmail }) {

@@ -1,18 +1,61 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import heartIcon from '../images/heart.png';
+import heartIcon from '../assets/heart.png';
 import './login.css';
 
 export default function Login({ setIsLoggedIn, setUserEmail }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setIsLoggedIn(true);
-    setUserEmail(email);
-    navigate('/home');
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      
+      if (response.ok) {
+        const { token } = await response.json();
+        // Store token in localStorage for future API calls
+        localStorage.setItem('userToken', token);
+        setIsLoggedIn(true);
+        setUserEmail(email);
+        navigate('/home');
+      } else {
+        const data = await response.json();
+        setError(data.msg || 'Login failed');
+      }
+    } catch (err) {
+      setError('Failed to connect to server');
+    }
+  };
+
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/auth/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      
+      if (response.ok) {
+        const { token } = await response.json();
+        localStorage.setItem('userToken', token);
+        setIsLoggedIn(true);
+        setUserEmail(email);
+        navigate('/home');
+      } else {
+        const data = await response.json();
+        setError(data.msg || 'Account creation failed');
+      }
+    } catch (err) {
+      setError('Failed to connect to server');
+    }
   };
 
   return (
@@ -44,8 +87,9 @@ export default function Login({ setIsLoggedIn, setUserEmail }) {
         </div>
         <div className="login-create">
           <button type="submit" className="login">Login</button>
-          <button type="submit" className="create">Create</button>
+          <button type="button" onClick={handleCreate} className="create">Create</button>
         </div>
+        {error && <p className="error-message" style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
       </form>
     </main>
   );
