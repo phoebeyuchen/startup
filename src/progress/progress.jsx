@@ -1,10 +1,42 @@
-import React, { useContext } from 'react';
-import { AnswersContext } from '../AnswersContext';
-import checklistIcon from '../images/checklist.png';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import checklistIcon from '../assets/checklist.png';
 import './progress.css';
 
 export default function Progress() {
-  const { answers } = useContext(AnswersContext);
+  const [answers, setAnswers] = useState([]);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchAnswers = async () => {
+      try {
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+          navigate('/');
+          return;
+        }
+
+        const response = await fetch('/api/answers', {
+          headers: {
+            'Authorization': token
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setAnswers(data);
+        } else {
+          const data = await response.json();
+          setError(data.msg || 'Failed to load answers');
+        }
+      } catch (err) {
+        setError('Failed to connect to server');
+      }
+    };
+
+    fetchAnswers();
+  }, [navigate]);
 
   return (
     <main>
@@ -12,6 +44,7 @@ export default function Progress() {
         <h2>Answered Questions</h2>
         <img src={checklistIcon} alt="checklist" className="progress-icon" />
       </div>
+      {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
       <table>
         <thead>
           <tr>
@@ -26,8 +59,8 @@ export default function Progress() {
             <tr key={answer.id}>
               <td>{index + 1}</td>
               <td>{answer.question}</td>
-              <td>{answer.answers.User}</td>
-              <td>{answer.date}</td>
+              <td>{answer.answer}</td>
+              <td>{new Date(answer.date).toLocaleDateString()}</td>
             </tr>
           ))}
         </tbody>
