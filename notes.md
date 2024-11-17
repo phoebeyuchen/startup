@@ -124,3 +124,65 @@ src/
   App.jsx      # Main component
   main.jsx     # Entry point
 ```
+
+## Service
+
+### HTTP Service
+- **Express**: Node.js web application framework
+  - Handles HTTP requests and responses
+  - Provides routing functionality
+  - Manages middleware
+
+### Endpoints
+- **REST**: Representational State Transfer
+  - GET: Retrieve data
+  - POST: Create new data
+  - PUT: Update existing data
+  - DELETE: Remove data
+
+### Middleware
+- Functions that process requests and responses
+- Common uses:
+  - Static file serving
+  - JSON parsing
+  - Authentication
+  - Error handling
+
+### Authentication
+- **Token-based auth**:
+  - User logs in -> receives token
+  - Token sent with subsequent requests
+  - Protects private endpoints
+
+### Development vs Production
+- **Development**:
+  - Local servers
+  - Debug tools
+  - Live reloading
+- **Production**:
+  - Hosted on cloud server
+  - Optimized builds
+  - Environment variables
+
+### Frontend-Backend Communication
+- **Fetch API**: Makes HTTP requests
+- **Proxy**: Routes requests between frontend and backend
+- **CORS**: Controls resource sharing between origins
+
+### Data Storage
+- **Memory Storage**: Temporary, clears on restart
+- **Persistent Storage**: Permanent data storage
+- **Session Storage**: User-specific temporary data
+
+### Error Handling
+- **HTTP Status Codes**:
+  - 200: Success
+  - 400: Bad request
+  - 401: Unauthorized
+  - 404: Not found
+  - 500: Server error
+
+### Deployment
+- **Build Process**: Compiles and bundles code
+- **Static Files**: Served directly by web server
+- **Environment Config**: Differs between development and production
