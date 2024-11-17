@@ -55,21 +55,32 @@ apiRouter.delete('/auth/logout', (req, res) => {
 
 // Question endpoints
 let currentQuestion = null;
+let currentStarter = null;
 let lastQuestionDate = null;
+
+const starters = [
+  "What do you think about this quote: ",
+  "How does this make you feel: ",
+  "How can we apply this to our relationship: ",
+  "Share a memory that relates to this: ",
+  "What does this quote mean to you: "
+];
+
 apiRouter.get('/question', async (_req, res) => {
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
-    // If we have a question for today, return it
-    if (currentQuestion && lastQuestionDate && lastQuestionDate.getTime() === today.getTime()) {
+    // If we have a question and starter for today, return them
+    if (currentQuestion && currentStarter && lastQuestionDate && lastQuestionDate.getTime() === today.getTime()) {
       return res.send({
         question: currentQuestion,
+        starter: currentStarter,
         date: lastQuestionDate.toISOString()
       });
     }
 
-    // Otherwise, fetch a new question
+    // Otherwise, fetch a new question and select a new starter
     const response = await fetch('https://api.api-ninjas.com/v1/quotes?category=love', {
       headers: {
         'X-Api-Key': 'fp78EFMI/VJ6NsEqVO+JwA==ALxoasBJu4wh1Hmu' 
@@ -82,10 +93,12 @@ apiRouter.get('/question', async (_req, res) => {
 
     const questions = await response.json();
     currentQuestion = questions[0]?.quote;
+    currentStarter = starters[Math.floor(Math.random() * starters.length)];
     lastQuestionDate = today;
     
     res.send({
       question: currentQuestion,
+      starter: currentStarter,
       date: lastQuestionDate.toISOString()
     });
   } catch (error) {

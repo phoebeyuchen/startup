@@ -5,26 +5,13 @@ import './question.css';
 
 export default function Question() {
   const [userAnswer, setUserAnswer] = useState('');
-  const [question, setQuestion] = useState('');
+  const [formattedQuestion, setFormattedQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [hasAnswered, setHasAnswered] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [answerId, setAnswerId] = useState(null);
   const navigate = useNavigate();
-  
-  const transformToQuestion = (quote) => {
-    const starters = [
-      "What do you think about this quote: ",
-      "How does this make you feel: ",
-      "How can we apply this to our relationship: ",
-      "Share a memory that relates to this: ",
-      "What does this quote mean to you: "
-    ];
-    
-    const starter = starters[Math.floor(Math.random() * starters.length)];
-    return `${starter}"${quote}"`;
-  };
   
   useEffect(() => {
     const fetchQuestionAndCheckAnswer = async () => {
@@ -63,7 +50,7 @@ export default function Question() {
         const storedDate = localStorage.getItem('questionDate');
         
         if (storedQuestion && storedDate && new Date(storedDate).getTime() === today.getTime()) {
-          setQuestion(storedQuestion);
+          setFormattedQuestion(storedQuestion);
           setIsLoading(false);
           return;
         }
@@ -75,12 +62,12 @@ export default function Question() {
         }
         
         const data = await response.json();
-        const formattedQuestion = transformToQuestion(data.question);
+        const fullQuestion = `${data.starter}"${data.question}"`;
         
-        localStorage.setItem('dailyQuestion', formattedQuestion);
+        localStorage.setItem('dailyQuestion', fullQuestion);
         localStorage.setItem('questionDate', new Date(data.date).toISOString());
         
-        setQuestion(formattedQuestion);
+        setFormattedQuestion(fullQuestion);
         setError('');
       } catch (err) {
         setError('Failed to load today\'s question. Please try again later.');
@@ -146,7 +133,7 @@ export default function Question() {
           'Authorization': token
         },
         body: JSON.stringify({
-          question: question,
+          question: formattedQuestion,
           answer: userAnswer
         })
       });
@@ -180,7 +167,7 @@ export default function Question() {
         </p>
       ) : (
         <>
-          <p className="question-text">{question}</p>
+          <p className="question-text">{formattedQuestion}</p>
           <div className="textarea-container">
             <textarea
               placeholder="Type your answer here..."
