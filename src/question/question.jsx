@@ -8,9 +8,9 @@ export default function Question() {
   const [question, setQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [hasAnswered, setHasAnswered] = useState(false);
   const navigate = useNavigate();
   
-  // Function to transform a quote into a question
   const transformToQuestion = (quote) => {
     const starters = [
       "What do you think about this quote: ",
@@ -20,31 +20,51 @@ export default function Question() {
       "What does this quote mean to you: "
     ];
     
-    // Randomly select a question starter
     const starter = starters[Math.floor(Math.random() * starters.length)];
     return `${starter}"${quote}"`;
   };
   
   useEffect(() => {
-    const fetchQuestion = async () => {
+    const fetchQuestionAndCheckAnswer = async () => {
       try {
         setIsLoading(true);
-        
-        // Check if we already have today's question in localStorage
-        const storedQuestion = localStorage.getItem('dailyQuestion');
-        const storedDate = localStorage.getItem('questionDate');
         
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         
-        // If we have a stored question from today, use it
+        // First, check if user has already answered today
+        const token = localStorage.getItem('userToken');
+        const answersResponse = await fetch('/api/answers', {
+          headers: {
+            'Authorization': token
+          }
+        });
+        
+        if (answersResponse.ok) {
+          const answers = await answersResponse.json();
+          const todayAnswer = answers.find(answer => {
+            const answerDate = new Date(answer.date);
+            return answerDate.getDate() === today.getDate() &&
+                   answerDate.getMonth() === today.getMonth() &&
+                   answerDate.getFullYear() === today.getFullYear();
+          });
+          
+          if (todayAnswer) {
+            setHasAnswered(true);
+            setUserAnswer(todayAnswer.answer);
+          }
+        }
+        
+        // Then fetch today's question
+        const storedQuestion = localStorage.getItem('dailyQuestion');
+        const storedDate = localStorage.getItem('questionDate');
+        
         if (storedQuestion && storedDate && new Date(storedDate).getTime() === today.getTime()) {
           setQuestion(storedQuestion);
           setIsLoading(false);
           return;
         }
         
-        // Otherwise, fetch a new question
         const response = await fetch('/api/question');
         
         if (!response.ok) {
@@ -54,7 +74,6 @@ export default function Question() {
         const data = await response.json();
         const formattedQuestion = transformToQuestion(data.question);
         
-        // Store the new question and date
         localStorage.setItem('dailyQuestion', formattedQuestion);
         localStorage.setItem('questionDate', new Date(data.date).toISOString());
         
@@ -62,13 +81,13 @@ export default function Question() {
         setError('');
       } catch (err) {
         setError('Failed to load today\'s question. Please try again later.');
-        console.error('Error fetching question:', err);
+        console.error('Error:', err);
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchQuestion();
+    fetchQuestionAndCheckAnswer();
   }, []);
 
   const handleSave = async () => {
@@ -97,7 +116,7 @@ export default function Question() {
       });
 
       if (response.ok) {
-        setUserAnswer('');
+        setHasAnswered(true);
         setError('');
         alert('Answer saved successfully!');
       } else {
@@ -131,12 +150,20 @@ export default function Question() {
           <p className="question-text">{question}</p>
           <div className="textarea-container">
             <textarea
-              placeholder="Type your answer here..."
+              placeholder={hasAnswered ? "You've already answered today's question!" : "Type your answer here..."}
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
+              disabled={hasAnswered}
             />
-            <button onClick={handleSave} className="save">Save</button>
+            {!hasAnswered && (
+              <button onClick={handleSave} className="save">Save</button>
+            )}
           </div>
+          {hasAnswered && (
+            <p style={{ textAlign: 'center', color: '#6a605c', marginTop: '10px' }}>
+              Come back tomorrow for a new question!
+            </p>
+          )}
         </>
       )}
     </main>

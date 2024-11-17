@@ -5,7 +5,8 @@
     font-size: 20px;
     text-align: center;
     letter-spacing: 1px;
-    margin: 0 100px;
+    margin: 0;
+    width: 600px;
 }
 .question-icon {
     padding-left: 5px;
