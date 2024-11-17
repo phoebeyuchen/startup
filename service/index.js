@@ -54,8 +54,22 @@ apiRouter.delete('/auth/logout', (req, res) => {
 });
 
 // Question endpoints
+let currentQuestion = null;
+let lastQuestionDate = null;
 apiRouter.get('/question', async (_req, res) => {
   try {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // If we have a question for today, return it
+    if (currentQuestion && lastQuestionDate && lastQuestionDate.getTime() === today.getTime()) {
+      return res.send({
+        question: currentQuestion,
+        date: lastQuestionDate.toISOString()
+      });
+    }
+
+    // Otherwise, fetch a new question
     const response = await fetch('https://api.api-ninjas.com/v1/quotes?category=love', {
       headers: {
         'X-Api-Key': 'fp78EFMI/VJ6NsEqVO+JwA==ALxoasBJu4wh1Hmu' 
@@ -67,11 +81,12 @@ apiRouter.get('/question', async (_req, res) => {
     }
 
     const questions = await response.json();
-    const question = questions[0]?.quote;
+    currentQuestion = questions[0]?.quote;
+    lastQuestionDate = today;
     
     res.send({
-      question: question,
-      date: new Date().toISOString()
+      question: currentQuestion,
+      date: lastQuestionDate.toISOString()
     });
   } catch (error) {
     console.error('Error fetching question:', error);

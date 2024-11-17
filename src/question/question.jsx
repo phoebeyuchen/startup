@@ -29,6 +29,22 @@ export default function Question() {
     const fetchQuestion = async () => {
       try {
         setIsLoading(true);
+        
+        // Check if we already have today's question in localStorage
+        const storedQuestion = localStorage.getItem('dailyQuestion');
+        const storedDate = localStorage.getItem('questionDate');
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // If we have a stored question from today, use it
+        if (storedQuestion && storedDate && new Date(storedDate).getTime() === today.getTime()) {
+          setQuestion(storedQuestion);
+          setIsLoading(false);
+          return;
+        }
+        
+        // Otherwise, fetch a new question
         const response = await fetch('/api/question');
         
         if (!response.ok) {
@@ -37,6 +53,11 @@ export default function Question() {
         
         const data = await response.json();
         const formattedQuestion = transformToQuestion(data.question);
+        
+        // Store the new question and date
+        localStorage.setItem('dailyQuestion', formattedQuestion);
+        localStorage.setItem('questionDate', new Date(data.date).toISOString());
+        
         setQuestion(formattedQuestion);
         setError('');
       } catch (err) {
