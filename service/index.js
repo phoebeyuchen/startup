@@ -1,6 +1,6 @@
 const express = require('express');
+const fetch = require('node-fetch');
 const uuid = require('uuid');
-const fetch = require('node-fetch'); 
 const app = express();
 
 // The scores and users are saved in memory and disappear whenever the service is restarted.
@@ -54,12 +54,29 @@ apiRouter.delete('/auth/logout', (req, res) => {
 });
 
 // Question endpoints
-apiRouter.get('/question', (_req, res) => {
-  // fetch from a question bank or external API
-  res.send({
-    question: "How did you feel when you first met each other?",
-    date: new Date().toISOString()
-  });
+apiRouter.get('/question', async (_req, res) => {
+  try {
+    const response = await fetch('https://api.api-ninjas.com/v1/quotes?category=love', {
+      headers: {
+        'X-Api-Key': 'fp78EFMI/VJ6NsEqVO+JwA==ALxoasBJu4wh1Hmu' 
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch question');
+    }
+
+    const questions = await response.json();
+    const question = questions[0]?.quote;
+    
+    res.send({
+      question: question,
+      date: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Error fetching question:', error);
+    res.status(500).send({ error: 'Failed to fetch question from API' });
+  }
 });
 
 // Answer endpoints
