@@ -14,9 +14,6 @@ table {
 tbody tr:nth-child(even) {
     background-color: #f0eaea;
 }
-tbody tr:hover {
-    background-color: #e3dcd9; 
-}
 th {
     color: #6a605c; 
     background-color: #baa9a4; 

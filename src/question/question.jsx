@@ -9,6 +9,8 @@ export default function Question() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [hasAnswered, setHasAnswered] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [answerId, setAnswerId] = useState(null);
   const navigate = useNavigate();
   
   const transformToQuestion = (quote) => {
@@ -52,6 +54,7 @@ export default function Question() {
           if (todayAnswer) {
             setHasAnswered(true);
             setUserAnswer(todayAnswer.answer);
+            setAnswerId(todayAnswer.id);
           }
         }
         
@@ -90,7 +93,37 @@ export default function Question() {
     fetchQuestionAndCheckAnswer();
   }, []);
 
-  const handleSave = async () => {
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    // Reset to the original answer
+    const fetchOriginalAnswer = async () => {
+      try {
+        const token = localStorage.getItem('userToken');
+        const response = await fetch('/api/answers', {
+          headers: {
+            'Authorization': token
+          }
+        });
+        
+        if (response.ok) {
+          const answers = await response.json();
+          const todayAnswer = answers.find(a => a.id === answerId);
+          if (todayAnswer) {
+            setUserAnswer(todayAnswer.answer);
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching original answer:', err);
+      }
+    };
+    fetchOriginalAnswer();
+  };
+
+  const handleSaveOrUpdate = async () => {
     if (!userAnswer.trim()) {
       setError('Please enter an answer before saving');
       return;
@@ -103,8 +136,11 @@ export default function Question() {
         return;
       }
 
-      const response = await fetch('/api/answer', {
-        method: 'POST',
+      const endpoint = hasAnswered ? `/api/answer/${answerId}` : '/api/answer';
+      const method = hasAnswered ? 'PUT' : 'POST';
+
+      const response = await fetch(endpoint, {
+        method: method,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': token
@@ -117,8 +153,11 @@ export default function Question() {
 
       if (response.ok) {
         setHasAnswered(true);
+        setIsEditing(false);
         setError('');
-        alert('Answer saved successfully!');
+        const data = await response.json();
+        setAnswerId(data.id);
+        alert(hasAnswered ? 'Answer updated successfully!' : 'Answer saved successfully!');
       } else {
         const data = await response.json();
         throw new Error(data.msg || 'Failed to save answer');
@@ -135,12 +174,6 @@ export default function Question() {
         <img src={questionIcon} alt="question" className="question-icon" />
       </div>
       
-      {error && (
-        <p className="error-message" style={{ color: 'red', textAlign: 'center' }}>
-          {error}
-        </p>
-      )}
-      
       {isLoading ? (
         <p className="loading" style={{ textAlign: 'center', color: '#6a605c' }}>
           Loading today's question...
@@ -150,18 +183,32 @@ export default function Question() {
           <p className="question-text">{question}</p>
           <div className="textarea-container">
             <textarea
-              placeholder={hasAnswered ? "You've already answered today's question!" : "Type your answer here..."}
+              placeholder="Type your answer here..."
               value={userAnswer}
               onChange={(e) => setUserAnswer(e.target.value)}
-              disabled={hasAnswered}
+              disabled={hasAnswered && !isEditing}
             />
             {!hasAnswered && (
-              <button onClick={handleSave} className="save">Save</button>
+              <button onClick={handleSaveOrUpdate} className="save">Save</button>
+            )}
+            {hasAnswered && !isEditing && (
+              <button onClick={handleEditClick} className="edit">Edit</button>
+            )}
+            {hasAnswered && isEditing && (
+              <div>
+                <button onClick={handleSaveOrUpdate} className="save">Update</button>
+                <button onClick={handleCancelEdit} className="cancel">Cancel</button>
+              </div>
             )}
           </div>
-          {hasAnswered && (
+          {hasAnswered && !isEditing && (
             <p style={{ textAlign: 'center', color: '#6a605c', marginTop: '10px' }}>
-              Come back tomorrow for a new question!
+              You can edit your answer or come back tomorrow for a new question!
+            </p>
+          )}
+          {error && (
+            <p className="error-message" style={{ color: 'red', textAlign: 'center' }}>
+              {error}
             </p>
           )}
         </>

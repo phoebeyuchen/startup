@@ -129,6 +129,50 @@ apiRouter.post('/answer', (req, res) => {
   res.send(newAnswer);
 });
 
+apiRouter.put('/answer/:id', (req, res) => {
+  const userToken = req.headers.authorization;
+  const user = Object.values(users).find((u) => u.token === userToken);
+  
+  if (!user) {
+    res.status(401).send({ msg: 'Unauthorized' });
+    return;
+  }
+
+  const answerIndex = answers.findIndex(a => a.id === req.params.id);
+  
+  if (answerIndex === -1) {
+    res.status(404).send({ msg: 'Answer not found' });
+    return;
+  }
+
+  const answer = answers[answerIndex];
+  
+  // Verify the answer belongs to the user
+  if (answer.userEmail !== user.email) {
+    res.status(403).send({ msg: 'Not authorized to edit this answer' });
+    return;
+  }
+
+  // Verify the answer is from today
+  const answerDate = new Date(answer.date);
+  const today = new Date();
+  if (answerDate.getDate() !== today.getDate() ||
+      answerDate.getMonth() !== today.getMonth() ||
+      answerDate.getFullYear() !== today.getFullYear()) {
+    res.status(400).send({ msg: 'Can only edit answers from today' });
+    return;
+  }
+
+  // Update the answer
+  answers[answerIndex] = {
+    ...answer,
+    answer: req.body.answer,
+    date: new Date().toISOString() // Update timestamp
+  };
+
+  res.send(answers[answerIndex]);
+});
+
 // Chat endpoints
 apiRouter.get('/messages', (req, res) => {
   const userToken = req.headers.authorization;

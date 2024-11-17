@@ -28,9 +28,6 @@ textarea {
     padding: 10px 0 0 12px;
     margin-top: 10px;
 }
-textarea:hover {
-    border: 1px solid #baa9a4;
-}
 textarea:focus {
     border: 1.5px solid #baa9a4;
     outline: none;
@@ -48,4 +45,32 @@ textarea:focus {
 }
 .save:hover {
     background-color: #a89790;
+}
+.edit {
+    color: #fff;
+    background-color: #baa9a4;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    padding: 5px 12px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.cancel {
+    color: #6a605c;
+    background-color: #f8f5f4;
+    border-radius: 5px;
+    border: 1px solid #baa9a4;
+    padding: 5px 12px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px; 
+    right: 90px;  
+}
+.edit:hover, .save:hover {
+    background-color: #a89790;
+}
+.cancel:hover {
+    background-color: #e3dcd9;
 }
