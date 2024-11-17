@@ -63,4 +63,21 @@ For this deliverable, I used React to make the application work for a single use
 - [x] **Router** - Routing between all components with protected routes after login.
 - [x] **Hooks** - Used useState for component state and useContext for sharing answer data between components.
 
+## Service deliverable
 
+For this deliverable, I added backend endpoints that support my application's features.
+
+- [x] **Node.js/Express HTTP service** - done!
+- [x] **Static middleware for frontend** - done!
+- [x] **Calls to third party endpoints** - Integrated with the Ninjas quotes API to fetch daily relationship questions.
+- [x] **Backend service endpoints** - Created endpoints for:
+  - Authentication (login, create account, logout)
+  - Questions (fetch daily question)
+  - Answers (get all answers, post new answer, update answer)
+  - Chat messages (get all messages, post new message)
+- [x] **Frontend calls service endpoints** - The frontend calls the backend using the fetch function for:
+  - User authentication
+  - Fetching and submitting daily question answers
+  - Getting answer history
+  - Real-time chat functionality
+- [x] **Data persistence** - Currently storing users, answers, and chat messages in server memory. Will be replaced with database in future deliverable.
