@@ -1,42 +1,26 @@
 const express = require('express');
-const fetch = require('node-fetch');
+const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
+const fetch = require('node-fetch');
 const uuid = require('uuid');
 const db = require('./database');
 const app = express();
 
-// The service port
+// Constants
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const authCookieName = 'token';
 
-// JSON body parsing using built-in middleware
+// Middleware
 app.use(express.json());
-
-// Serve up the front-end static content hosting
+app.use(cookieParser());
 app.use(express.static('public'));
+app.set('trust proxy', true);
 
 // Router for service endpoints
 const apiRouter = express.Router();
-app.use(`/api`, apiRouter);
+app.use('/api', apiRouter);
 
-// Authorization middleware
-const authMiddleware = async (req, res, next) => {
-  const authToken = req.headers.authorization;
-  if (!authToken) {
-    res.status(401).send({ msg: 'Missing authorization token' });
-    return;
-  }
-
-  const user = await db.getUserByToken(authToken);
-  if (!user) {
-    res.status(401).send({ msg: 'Invalid authorization token' });
-    return;
-  }
-
-  req.user = user;
-  next();
-};
-
-// CreateAuth a new user
+// CreateAuth token for a new user
 apiRouter.post('/auth/create', async (req, res) => {
   if (!req.body.email || !req.body.password) {
     res.status(400).send({ msg: 'Email and password required' });
@@ -44,24 +28,25 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 
   try {
-    const user = await db.getUser(req.body.email);
-    if (user) {
+    if (await db.getUser(req.body.email)) {
       res.status(409).send({ msg: 'Existing user' });
     } else {
-      const newUser = await db.createUser(req.body.email, req.body.password);
-      res.send({ token: newUser.token });
+      const user = await db.createUser(req.body.email, req.body.password);
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
     }
   } catch (error) {
     res.status(500).send({ msg: 'Database error during user creation' });
   }
 });
 
-// GetAuth login an existing user
+// GetAuth token for the provided credentials
 apiRouter.post('/auth/login', async (req, res) => {
   try {
     const user = await db.getUser(req.body.email);
     if (user && await bcrypt.compare(req.body.password, user.password)) {
-      res.send({ token: user.token });
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
       return;
     }
     res.status(401).send({ msg: 'Unauthorized' });
@@ -70,13 +55,29 @@ apiRouter.post('/auth/login', async (req, res) => {
   }
 });
 
-// DeleteAuth logout a user
+// DeleteAuth token if stored in cookie
 apiRouter.delete('/auth/logout', (_req, res) => {
+  res.clearCookie(authCookieName);
   res.status(204).end();
 });
 
+// Secure router with authentication
+const secureApiRouter = express.Router();
+apiRouter.use(secureApiRouter);
+
+secureApiRouter.use(async (req, res, next) => {
+  const authToken = req.cookies[authCookieName];
+  const user = await db.getUserByToken(authToken);
+  if (user) {
+    req.user = user;
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
 // Question endpoints
-apiRouter.get('/question', async (_req, res) => {
+secureApiRouter.get('/question', async (_req, res) => {
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -125,7 +126,7 @@ apiRouter.get('/question', async (_req, res) => {
 });
 
 // Answer endpoints
-apiRouter.get('/answers', authMiddleware, async (req, res) => {
+secureApiRouter.get('/answers', async (req, res) => {
   try {
     const answers = await db.getAnswers(req.user.email);
     res.send(answers);
@@ -134,7 +135,7 @@ apiRouter.get('/answers', authMiddleware, async (req, res) => {
   }
 });
 
-apiRouter.post('/answer', authMiddleware, async (req, res) => {
+secureApiRouter.post('/answer', async (req, res) => {
   try {
     const newAnswer = {
       id: uuid.v4(),
@@ -151,7 +152,7 @@ apiRouter.post('/answer', authMiddleware, async (req, res) => {
   }
 });
 
-apiRouter.put('/answer/:id', authMiddleware, async (req, res) => {
+secureApiRouter.put('/answer/:id', async (req, res) => {
   try {
     const answer = await db.getAnswerById(req.params.id);
     if (!answer) {
@@ -185,7 +186,7 @@ apiRouter.put('/answer/:id', authMiddleware, async (req, res) => {
 });
 
 // Chat endpoints
-apiRouter.get('/messages', authMiddleware, async (req, res) => {
+secureApiRouter.get('/messages', async (_req, res) => {
   try {
     const messages = await db.getMessages();
     res.send(messages);
@@ -194,7 +195,7 @@ apiRouter.get('/messages', authMiddleware, async (req, res) => {
   }
 });
 
-apiRouter.post('/message', authMiddleware, async (req, res) => {
+secureApiRouter.post('/message', async (req, res) => {
   try {
     const newMessage = {
       id: uuid.v4(),
@@ -210,12 +211,25 @@ apiRouter.post('/message', authMiddleware, async (req, res) => {
   }
 });
 
+// Error handler
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
+});
+
 // Default path handler
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-// Start server
+// Cookie helper
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
