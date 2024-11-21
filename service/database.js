@@ -6,12 +6,12 @@ const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('rental');
-
 const userCollection = db.collection('user');
 const answerCollection = db.collection('answer');
 const messageCollection = db.collection('message');
 const questionCollection = db.collection('question');
 
+// This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
   await client.connect();
   await db.command({ ping: 1 });
@@ -30,9 +30,7 @@ function getUserByToken(token) {
 }
 
 async function createUser(email, password) {
-  // Hash the password before storing
   const passwordHash = await bcrypt.hash(password, 10);
-
   const user = {
     email: email,
     password: passwordHash,
@@ -44,54 +42,36 @@ async function createUser(email, password) {
 }
 
 // Answer functions
-async function getAnswers(userEmail) {
-  const query = { userEmail: userEmail };
-  const options = {
-    sort: { date: -1 }
-  };
-  const cursor = answerCollection.find(query, options);
-  return cursor.toArray();
+function getAnswers(userEmail) {
+  return answerCollection.find({ userEmail: userEmail }).sort({ date: -1 }).toArray();
 }
 
-async function getAnswerById(id) {
+function getAnswerById(id) {
   return answerCollection.findOne({ id: id });
 }
 
-async function createAnswer(answer) {
-  return answerCollection.insertOne({
-    ...answer,
-    created: new Date()
-  });
+function createAnswer(answer) {
+  return answerCollection.insertOne(answer);
 }
 
-async function updateAnswer(id, newAnswer) {
-  const query = { id: id };
-  const update = { $set: { 
-    answer: newAnswer,
-    updated: new Date()
-  }};
-  return answerCollection.updateOne(query, update);
+function updateAnswer(id, newAnswer) {
+  return answerCollection.updateOne(
+    { id: id },
+    { $set: { answer: newAnswer, updated: new Date() }}
+  );
 }
 
 // Message functions
-async function getMessages() {
-  const options = {
-    sort: { timestamp: -1 },
-    limit: 100 // Limit to last 100 messages
-  };
-  const cursor = messageCollection.find({}, options);
-  return cursor.toArray();
+function getMessages() {
+  return messageCollection.find().sort({ timestamp: -1 }).limit(100).toArray();
 }
 
-async function createMessage(message) {
-  return messageCollection.insertOne({
-    ...message,
-    created: new Date()
-  });
+function createMessage(message) {
+  return messageCollection.insertOne(message);
 }
 
 // Question functions
-async function getDailyQuestion(date) {
+function getDailyQuestion(date) {
   const startOfDay = new Date(date);
   startOfDay.setHours(0, 0, 0, 0);
   const endOfDay = new Date(date);
@@ -105,11 +85,8 @@ async function getDailyQuestion(date) {
   });
 }
 
-async function createQuestion(question) {
-  return questionCollection.insertOne({
-    ...question,
-    created: new Date()
-  });
+function createQuestion(question) {
+  return questionCollection.insertOne(question);
 }
 
 module.exports = {
