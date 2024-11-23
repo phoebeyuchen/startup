@@ -11,7 +11,6 @@ const answerCollection = db.collection('answer');
 const messageCollection = db.collection('message');
 const questionCollection = db.collection('question');
 
-// This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
   await client.connect();
   await db.command({ ping: 1 });
