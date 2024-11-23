@@ -6,7 +6,6 @@ const uuid = require('uuid');
 const db = require('./database');
 const app = express();
 
-// Constants
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 const authCookieName = 'token';
 
