@@ -81,3 +81,14 @@ For this deliverable, I added backend endpoints that support my application's fe
   - Getting answer history
   - Real-time chat functionality
 - [x] **Data persistence** - Currently storing users, answers, and chat messages in server memory. Will be replaced with database in future deliverable.
+
+## DB/Login deliverable
+
+For this deliverable, I connected the application to a MongoDB database and added user authentication.
+
+- [x] **MongoDB Atlas database created** - Done! Created a new database on MongoDB Atlas.
+- [x] **Stores data in MongoDB** - Now saving all users, answers, questions, and chat messages in MongoDB instead of server memory.
+- [x] **User registration** - When you create a new account, it saves your information in the database.
+- [x] **Existing user** - When you log in again, it finds your data and shows your previous answers.
+- [x] **Use MongoDB to store credentials** - Safely stores usernames and encrypted passwords.
+- [x] **Restricts functionality** - You can't see questions, answers, or chat until you log in. The backend checks if you're logged in before showing any data.
