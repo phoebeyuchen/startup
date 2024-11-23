@@ -186,3 +186,29 @@ src/
 - **Build Process**: Compiles and bundles code
 - **Static Files**: Served directly by web server
 - **Environment Config**: Differs between development and production
+
+## DB/Login
+
+### MongoDB Basics
+- NoSQL database that stores data in collections (like folders)
+- Each item is a document (like JSON)
+- Flexible - no strict structure required
+- Good for storing user data, posts, messages
+
+### User Authentication Flow
+1. User signs up → Create account in database
+2. User logs in → Check password matches
+3. Server creates token → Sent to browser in cookie
+4. Each request includes token → Server verifies it
+
+### Security Concepts
+- Never store raw passwords
+- Hash passwords before saving
+- Use secure cookies for sessions
+- Check user permissions for each action
+
+### Connecting Parts
+- Frontend sends requests
+- Server checks permission
+- Database stores/retrieves data
+- Responses go back to frontend
