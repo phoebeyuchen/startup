@@ -19,19 +19,32 @@ function peerProxy(httpServer) {
     const connection = { id: uuid.v4(), alive: true, ws: ws };
     connections.push(connection);
 
-    // Forward messages to everyone except the sender
+    // Handle incoming messages
     ws.on('message', function message(data) {
-      connections.forEach((c) => {
-        if (c.id !== connection.id) {
-          c.ws.send(data);
-        }
-      });
+      try {
+        // Parse the incoming message
+        const msg = JSON.parse(data);
+        
+        // Broadcast message to all other clients
+        connections.forEach((c) => {
+          if (c.id !== connection.id) {
+            c.ws.send(JSON.stringify({
+              type: 'chat',
+              id: msg.id,
+              userEmail: msg.userEmail,
+              text: msg.text,
+              timestamp: msg.timestamp
+            }));
+          }
+        });
+      } catch (e) {
+        console.error('Failed to parse message:', e);
+      }
     });
 
-    // Remove the closed connection so we don't try to forward anymore
+    // Handle connection close
     ws.on('close', () => {
-      const pos = connections.findIndex((o, i) => o.id === connection.id);
-
+      const pos = connections.findIndex((o) => o.id === connection.id);
       if (pos >= 0) {
         connections.splice(pos, 1);
       }
