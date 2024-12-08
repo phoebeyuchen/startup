@@ -77,6 +77,68 @@ secureApiRouter.use(async (req, res, next) => {
   }
 });
 
+// Connect with partner
+secureApiRouter.post('/partner/connect', async (req, res) => {
+  try {
+    console.log('Received request body:', req.body); // Debug log
+    const user = await db.getUserByToken(req.cookies[authCookieName]);
+    if (!user) {
+      res.status(401).send({ msg: 'Unauthorized' });
+      return;
+    }
+
+    const partnerEmail = req.body.partnerEmail;
+    if (!partnerEmail) {
+      res.status(400).send({ msg: 'Partner email is required' });
+      return;
+    }
+
+    // Use the authenticated user's email instead of requiring it in the request
+    const userEmail = user.email;
+    console.log('Connecting', userEmail, 'with', partnerEmail); // Debug log
+
+    // Check if partner email exists
+    const partner = await db.getUser(partnerEmail);
+    if (!partner) {
+      res.status(404).send({ msg: 'Partner email not found' });
+      return;
+    }
+
+    // Connect the partners
+    await db.connectPartners(userEmail, partnerEmail);
+    res.send({ msg: 'Successfully connected with partner' });
+  } catch (error) {
+    console.error('Partner connection error:', error);
+    res.status(500).send({ msg: error.message });
+  }
+});
+
+// Get partner information
+secureApiRouter.get('/partner', async (req, res) => {
+  try {
+    const authToken = req.cookies[authCookieName];
+    const user = await db.getUserByToken(authToken);
+    
+    if (!user) {
+      res.status(401).send({ msg: 'Unauthorized' });
+      return;
+    }
+
+    const partner = await db.getPartner(user.email);
+    if (!partner) {
+      res.status(404).send({ msg: 'No partner connected' });
+      return;
+    }
+
+    // Don't send sensitive information
+    const { password, token, ...partnerInfo } = partner;
+    res.send(partnerInfo);
+  } catch (error) {
+    console.error('Get partner error:', error);
+    res.status(500).send({ msg: 'Error retrieving partner information' });
+  }
+});
+
 // Question endpoints
 secureApiRouter.get('/question', async (_req, res) => {
   try {
