@@ -92,3 +92,12 @@ For this deliverable, I connected the application to a MongoDB database and adde
 - [x] **Existing user** - When you log in again, it finds your data and shows your previous answers.
 - [x] **Use MongoDB to store credentials** - Safely stores usernames and encrypted passwords.
 - [x] **Restricts functionality** - You can't see questions, answers, or chat until you log in. The backend checks if you're logged in before showing any data.
+
+## WebSocket deliverable
+
+For this deliverable, I used WebSocket to enable real-time chat communication between partners.
+
+- [x] **Backend listens for WebSocket connection** - done!
+- [x] **Frontend makes WebSocket connection** - done!
+- [x] **Data sent over WebSocket connection** - done!
+- [x] **WebSocket data displayed** - When partners send messages, they appear instantly in both users' chat windows.
