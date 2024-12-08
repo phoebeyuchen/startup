@@ -1,0 +1,52 @@
+.partner-section {
+  background-color: #f8f5f4;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.partner-form h3,
+.partner-info h3 {
+  color: #6a605c;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #baa9a4;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.input-group button {
+  background-color: #baa9a4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.input-group button:hover {
+  background-color: #a89790;
+}
+
+.partner-info {
+  color: #6a605c;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 10px;
+}
