@@ -212,3 +212,20 @@ src/
 - Server checks permission
 - Database stores/retrieves data
 - Responses go back to frontend
+
+## WebSocket
+
+### Core Concepts
+- **WebSocket Protocol**: Enables real-time bidirectional communication between client and server
+- **Key Features**:
+  - Full-duplex communication 
+  - Persistent connection
+  - Lower overhead than HTTP
+  - Real-time data transfer
+
+### Common Uses
+- Chat applications
+- Live notifications
+- Collaborative features
+- Real-time updates
+- Gaming applications
