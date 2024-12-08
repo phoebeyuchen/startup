@@ -229,3 +229,9 @@ src/
 - Collaborative features
 - Real-time updates
 - Gaming applications
+
+### Connection States
+- **Opening**: Initial connection request
+- **Open**: Ready for data transmission
+- **Closing**: Shutting down connection
+- **Closed**: Connection terminated
