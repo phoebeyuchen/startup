@@ -100,4 +100,5 @@ For this deliverable, I used WebSocket to enable real-time chat communication be
 - [x] **Backend listens for WebSocket connection** - done!
 - [x] **Frontend makes WebSocket connection** - done!
 - [x] **Data sent over WebSocket connection** - done!
-- [x] **WebSocket data displayed** - When partners send messages, they appear instantly in both users' chat windows.
+- [x] **WebSocket data displayed** - When partners save answers, they appear instantly in both users' progress windows.
+- [x] **All visible elements are working** - done!
